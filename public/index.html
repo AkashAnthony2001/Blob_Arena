@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOB ARENA 🟢 Multiplayer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══ SCREEN: START ══════════════════════════════════════════════ -->
+  <div id="screen-start" class="screen active">
+    <div class="scanlines"></div>
+    <div class="start-content">
+      <div class="logo-container">
+        <div class="logo-blob b1"></div>
+        <div class="logo-blob b2"></div>
+        <div class="logo-blob b3"></div>
+        <h1 class="logo-text">BLOB<br><span>ARENA</span></h1>
+      </div>
+      <p class="tagline">⚡ LAST BLOB STANDING WINS ⚡</p>
+      <div class="start-form">
+        <input id="username-input" type="text" placeholder="ENTER YOUR NAME" maxlength="16" autocomplete="off" spellcheck="false">
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-create">🚀 CREATE ROOM</button>
+          <button class="btn btn-secondary" id="btn-join-open">🎮 JOIN ROOM</button>
+        </div>
+        <div id="join-row" class="join-row hidden">
+          <input id="room-code-input" type="text" placeholder="ROOM CODE" maxlength="4" autocomplete="off">
+          <button class="btn btn-accent" id="btn-join-confirm">JOIN →</button>
+        </div>
+      </div>
+      <button class="btn btn-ghost" id="btn-leaderboard-open">🏆 LEADERBOARD</button>
+      <div class="how-to-play">
+        <p>🕹️ <b>WASD/ARROWS</b> to move &nbsp;|&nbsp; <b>MOUSE</b> to aim &nbsp;|&nbsp; <b>CLICK/SPACE</b> to shoot</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SCREEN: LOBBY ══════════════════════════════════════════════ -->
+  <div id="screen-lobby" class="screen">
+    <div class="scanlines"></div>
+    <div class="lobby-content">
+      <h2 class="lobby-title">⚡ LOBBY</h2>
+      <div class="room-info">
+        <span>ROOM: </span><span id="room-code-display" class="room-code">----</span>
+        <button class="btn btn-tiny" id="btn-copy-code">📋 COPY</button>
+        <span id="map-name-display" class="map-badge">MAP</span>
+      </div>
+      <div class="player-grid" id="player-grid"></div>
+      <div id="lobby-msg" class="lobby-msg">Waiting for players... (min 2)</div>
+      <div class="lobby-actions">
+        <button class="btn btn-primary" id="btn-start" disabled>▶ START GAME</button>
+        <button class="btn btn-ghost" id="btn-leave">← LEAVE</button>
+      </div>
+      <!-- Lobby chat -->
+      <div class="lobby-chat">
+        <div id="lobby-chat-msgs" class="chat-msgs"></div>
+        <div class="chat-input-row">
+          <input id="lobby-chat-input" type="text" placeholder="Chat..." maxlength="80" autocomplete="off">
+          <button class="btn btn-tiny" id="btn-lobby-send">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SCREEN: COUNTDOWN ══════════════════════════════════════════ -->
+  <div id="screen-countdown" class="screen">
+    <div class="countdown-number" id="countdown-number">3</div>
+    <div class="countdown-label">GET READY!</div>
+  </div>
+
+  <!-- ═══ SCREEN: GAME ═══════════════════════════════════════════════ -->
+  <div id="screen-game" class="screen">
+    <!-- HUD -->
+    <div class="hud">
+      <div class="hud-left">
+        <div id="hud-health-bar">
+          <div class="hud-label">HP</div>
+          <div class="health-track"><div id="health-fill" class="health-fill"></div></div>
+          <span id="health-val">100</span>
+        </div>
+        <div id="hud-powerups"></div>
+      </div>
+      <div class="hud-center">
+        <div id="hud-timer" class="hud-timer">1:30</div>
+        <div id="hud-alive" class="hud-alive">👥 8</div>
+      </div>
+      <div class="hud-right">
+        <div id="hud-score">SCORE: 0</div>
+        <div id="hud-kills">KILLS: 0</div>
+      </div>
+    </div>
+
+    <!-- Game Canvas -->
+    <div class="canvas-wrapper">
+      <canvas id="game-canvas" width="800" height="600"></canvas>
+      <!-- Kill feed -->
+      <div id="kill-feed" class="kill-feed"></div>
+      <!-- Power-up announce -->
+      <div id="pu-announce" class="pu-announce hidden"></div>
+    </div>
+
+    <!-- Scoreboard overlay (Tab) -->
+    <div id="scoreboard" class="scoreboard hidden">
+      <h3>📊 SCOREBOARD</h3>
+      <div id="scoreboard-list"></div>
+    </div>
+
+    <!-- In-game chat -->
+    <div class="ingame-chat">
+      <div id="game-chat-msgs" class="chat-msgs"></div>
+      <div class="chat-input-row hidden" id="chat-input-row">
+        <input id="game-chat-input" type="text" placeholder="Chat... (Enter to send)" maxlength="80" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="controls-hint">TAB: Scoreboard &nbsp;|&nbsp; T: Chat &nbsp;|&nbsp; WASD: Move &nbsp;|&nbsp; MOUSE: Aim &amp; Shoot</div>
+  </div>
+
+  <!-- ═══ SCREEN: GAME OVER ══════════════════════════════════════════ -->
+  <div id="screen-gameover" class="screen">
+    <div class="scanlines"></div>
+    <div class="gameover-content">
+      <div id="winner-banner" class="winner-banner"></div>
+      <div class="results-table-wrap">
+        <table class="results-table" id="results-table">
+          <thead><tr><th>#</th><th>PLAYER</th><th>SCORE</th><th>KILLS</th><th>DEATHS</th></tr></thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+      <div class="go-leaderboard">
+        <h3>🏆 SESSION LEADERBOARD</h3>
+        <div id="go-leaderboard-list"></div>
+      </div>
+      <div class="go-actions">
+        <button class="btn btn-primary" id="btn-play-again">🔄 PLAY AGAIN</button>
+        <button class="btn btn-ghost" id="btn-main-menu">🏠 MAIN MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODAL: LEADERBOARD ════════════════════════════════════════ -->
+  <div id="modal-leaderboard" class="modal hidden">
+    <div class="modal-box">
+      <h2>🏆 SESSION LEADERBOARD</h2>
+      <div id="modal-lb-list"></div>
+      <button class="btn btn-ghost" id="btn-lb-close">✕ CLOSE</button>
+    </div>
+  </div>
+
+  <!-- ═══ ERROR TOAST ════════════════════════════════════════════════ -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Socket.io CDN -->
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
