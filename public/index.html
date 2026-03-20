@@ -3,161 +3,449 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLOB ARENA 🟢 Multiplayer</title>
+  <title>NEON ARCADE 🕹️</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ═══ SCREEN: START ══════════════════════════════════════════════ -->
-  <div id="screen-start" class="screen active">
-    <div class="scanlines"></div>
-    <div class="start-content">
-      <div class="logo-container">
-        <div class="logo-blob b1"></div>
-        <div class="logo-blob b2"></div>
-        <div class="logo-blob b3"></div>
-        <h1 class="logo-text">BLOB<br><span>ARENA</span></h1>
-      </div>
-      <p class="tagline">⚡ LAST BLOB STANDING WINS ⚡</p>
-      <div class="start-form">
-        <input id="username-input" type="text" placeholder="ENTER YOUR NAME" maxlength="16" autocomplete="off" spellcheck="false">
-        <div class="btn-row">
-          <button class="btn btn-primary" id="btn-create">🚀 CREATE ROOM</button>
-          <button class="btn btn-secondary" id="btn-join-open">🎮 JOIN ROOM</button>
+<!-- ═══ SCREEN: ARCADE HUB ═════════════════════════════════════════════ -->
+<div id="screen-hub" class="screen active">
+  <div class="scanlines"></div>
+  <div class="hub-content">
+    <div class="arcade-header">
+      <div class="arcade-title">🕹️ NEON<span>ARCADE</span></div>
+      <div class="arcade-sub">MULTIPLAYER FLASH GAMES</div>
+    </div>
+
+    <div class="name-row">
+      <input id="username-input" type="text" placeholder="ENTER YOUR NAME" maxlength="16" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="game-grid">
+      <!-- Blob Arena -->
+      <div class="game-card" data-game="blob">
+        <div class="game-card-bg" style="--gc:#FF2D55"></div>
+        <div class="game-emoji">🟢</div>
+        <div class="game-title">BLOB ARENA</div>
+        <div class="game-desc">Last blob standing wins! Aim, shoot, survive.</div>
+        <div class="game-tags"><span>2-8 players</span><span>PvP</span><span>90s rounds</span></div>
+        <div class="game-controls-hint">WASD + Mouse</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="blob">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="blob">JOIN</button>
         </div>
-        <div id="join-row" class="join-row hidden">
-          <input id="room-code-input" type="text" placeholder="ROOM CODE" maxlength="4" autocomplete="off">
-          <button class="btn btn-accent" id="btn-join-confirm">JOIN →</button>
+      </div>
+      <!-- Snake Royale -->
+      <div class="game-card" data-game="snake">
+        <div class="game-card-bg" style="--gc:#39FF14"></div>
+        <div class="game-emoji">🐍</div>
+        <div class="game-title">SNAKE ROYALE</div>
+        <div class="game-desc">Grow longest, eat rivals. Classic snake gone multiplayer.</div>
+        <div class="game-tags"><span>2-6 players</span><span>PvP</span><span>Wrap maps</span></div>
+        <div class="game-controls-hint">WASD / Arrows</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="snake">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="snake">JOIN</button>
         </div>
       </div>
-      <button class="btn btn-ghost" id="btn-leaderboard-open">🏆 LEADERBOARD</button>
-      <div class="how-to-play">
-        <p>🕹️ <b>WASD/ARROWS</b> to move &nbsp;|&nbsp; <b>MOUSE</b> to aim &nbsp;|&nbsp; <b>CLICK/SPACE</b> to shoot</p>
+      <!-- Asteroid Dash -->
+      <div class="game-card" data-game="asteroid">
+        <div class="game-card-bg" style="--gc:#BF5FFF"></div>
+        <div class="game-emoji">🚀</div>
+        <div class="game-title">ASTEROID DASH</div>
+        <div class="game-desc">Co-op survival! Shoot asteroids together. Don't run out of lives.</div>
+        <div class="game-tags"><span>1-6 players</span><span>Co-op</span><span>Endless waves</span></div>
+        <div class="game-controls-hint">W + Mouse to aim &amp; shoot</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="asteroid">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="asteroid">JOIN</button>
+        </div>
       </div>
+      <!-- Pong Wars -->
+      <div class="game-card" data-game="pong">
+        <div class="game-card-bg" style="--gc:#FFD700"></div>
+        <div class="game-emoji">🏓</div>
+        <div class="game-title">PONG WARS</div>
+        <div class="game-desc">Team Pong chaos! Multi-ball madness. First to 7 wins.</div>
+        <div class="game-tags"><span>2-4 players</span><span>Teams</span><span>Multi-ball</span></div>
+        <div class="game-controls-hint">W/S or Up/Down arrows</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="pong">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="pong">JOIN</button>
+        </div>
+      </div>
+
+      <!-- ═══ NEW GAMES SECTION ══════════════════════════════════════════ -->
+      <div class="games-section-header">⚡ NEW — 20 MORE MULTIPLAYER GAMES</div>
+
+      <div class="games-category-label">🏰 CLASH ROYALE-STYLE</div>
+
+      <div class="game-card" data-game="laneclash">
+        <div class="game-card-bg" style="--gc:#FF9500"></div>
+        <div class="game-emoji">⚔️</div>
+        <div class="game-title">LANE CLASH</div>
+        <div class="game-desc">Spawn units across 3 lanes. Destroy the enemy base!</div>
+        <div class="game-tags"><span>2-4 players</span><span>PvP</span><span>2 min</span></div>
+        <div class="game-controls-hint">Click lane buttons to deploy</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="laneclash">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="laneclash">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="towersiege">
+        <div class="game-card-bg" style="--gc:#BF5FFF"></div>
+        <div class="game-emoji">🏯</div>
+        <div class="game-title">TOWER SIEGE</div>
+        <div class="game-desc">3 towers per side. Spend mana on cards. Destroy 2 towers to win!</div>
+        <div class="game-tags"><span>2-4 players</span><span>PvP</span><span>2.5 min</span></div>
+        <div class="game-controls-hint">Click cards to play them</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="towersiege">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="towersiege">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="unitrush">
+        <div class="game-card-bg" style="--gc:#FF6EC7"></div>
+        <div class="game-emoji">💥</div>
+        <div class="game-title">UNIT RUSH</div>
+        <div class="game-desc">Fast 90s battles. Send unit waves to smash the enemy gate!</div>
+        <div class="game-tags"><span>2-4 players</span><span>PvP</span><span>90s</span></div>
+        <div class="game-controls-hint">Click unit cards to deploy</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="unitrush">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="unitrush">JOIN</button>
+        </div>
+      </div>
+
+      <div class="games-category-label">🔫 SHOOTER / COMBAT</div>
+
+      <div class="game-card" data-game="bullethell">
+        <div class="game-card-bg" style="--gc:#FF2D55"></div>
+        <div class="game-emoji">🤖</div>
+        <div class="game-title">BULLET HELL ARENA</div>
+        <div class="game-desc">Survive drone waves and shoot rivals. Boss every 30 seconds!</div>
+        <div class="game-tags"><span>2-6 players</span><span>PvEvP</span><span>90s</span></div>
+        <div class="game-controls-hint">WASD + Mouse to aim/shoot</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="bullethell">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="bullethell">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="neontanks">
+        <div class="game-card-bg" style="--gc:#FFD700"></div>
+        <div class="game-emoji">🪖</div>
+        <div class="game-title">NEON TANKS</div>
+        <div class="game-desc">Bouncing bullets riccochet off walls! Blind-shot your enemies.</div>
+        <div class="game-tags"><span>2-6 players</span><span>PvP</span><span>90s</span></div>
+        <div class="game-controls-hint">A/D: Rotate | W/S: Drive | Space: Fire</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="neontanks">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="neontanks">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="lasertag">
+        <div class="game-card-bg" style="--gc:#00F5FF"></div>
+        <div class="game-emoji">🔦</div>
+        <div class="game-title">LASER TAG</div>
+        <div class="game-desc">One-shot instant lasers. Fast respawn. Most kills in 60s wins!</div>
+        <div class="game-tags"><span>2-6 players</span><span>PvP</span><span>60s</span></div>
+        <div class="game-controls-hint">WASD + Mouse to aim/shoot</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="lasertag">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="lasertag">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="spaceduel">
+        <div class="game-card-bg" style="--gc:#00FF8C"></div>
+        <div class="game-emoji">🛸</div>
+        <div class="game-title">SPACE DUEL</div>
+        <div class="game-desc">Newtonian drift physics. Shoot bullets or fire homing missiles!</div>
+        <div class="game-tags"><span>2-4 players</span><span>PvP</span><span>First to 5</span></div>
+        <div class="game-controls-hint">A/D: Rotate | W: Thrust | Space: Shoot | M: Missile</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="spaceduel">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="spaceduel">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="cybercapture">
+        <div class="game-card-bg" style="--gc:#FF2D55"></div>
+        <div class="game-emoji">🚩</div>
+        <div class="game-title">CYBER CAPTURE</div>
+        <div class="game-desc">2-team Capture The Flag! Steal the enemy flag and bring it home.</div>
+        <div class="game-tags"><span>2-6 players</span><span>Teams</span><span>CTF</span></div>
+        <div class="game-controls-hint">WASD + Mouse to aim/shoot</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="cybercapture">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="cybercapture">JOIN</button>
+        </div>
+      </div>
+
+      <div class="games-category-label">⚡ COMPETITIVE ARCADE</div>
+
+      <div class="game-card" data-game="reactionrace">
+        <div class="game-card-bg" style="--gc:#FF6EC7"></div>
+        <div class="game-emoji">⚡</div>
+        <div class="game-title">REACTION RACE</div>
+        <div class="game-desc">A color flashes — press the matching key first! Fastest fingers win.</div>
+        <div class="game-tags"><span>2-8 players</span><span>Reaction</span><span>Instant</span></div>
+        <div class="game-controls-hint">R/B/G/Y/P/O keys to match color</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="reactionrace">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="reactionrace">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="territory">
+        <div class="game-card-bg" style="--gc:#39FF14"></div>
+        <div class="game-emoji">🗺️</div>
+        <div class="game-title">TERRITORY WAR</div>
+        <div class="game-desc">Paint the floor by walking on it! Most tiles in 60s wins.</div>
+        <div class="game-tags"><span>2-6 players</span><span>Territory</span><span>60s</span></div>
+        <div class="game-controls-hint">WASD to move and paint</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="territory">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="territory">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="koth">
+        <div class="game-card-bg" style="--gc:#FFD700"></div>
+        <div class="game-emoji">👑</div>
+        <div class="game-title">KING OF THE HILL</div>
+        <div class="game-desc">Hold the center zone. First to 30 seconds of zone time wins!</div>
+        <div class="game-tags"><span>2-6 players</span><span>Zone</span><span>2 min</span></div>
+        <div class="game-controls-hint">WASD to move</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="koth">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="koth">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="infection">
+        <div class="game-card-bg" style="--gc:#39FF14"></div>
+        <div class="game-emoji">🧟</div>
+        <div class="game-title">INFECTION MODE</div>
+        <div class="game-desc">One zombie. Touch humans to spread! Last survivor wins.</div>
+        <div class="game-tags"><span>3-6 players</span><span>Tag</span><span>3 min</span></div>
+        <div class="game-controls-hint">WASD to move</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="infection">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="infection">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="gravitywars">
+        <div class="game-card-bg" style="--gc:#BF5FFF"></div>
+        <div class="game-emoji">🪐</div>
+        <div class="game-title">GRAVITY WARS</div>
+        <div class="game-desc">Turn-based artillery! Planets bend your trajectory. Eliminate all!</div>
+        <div class="game-tags"><span>2-4 players</span><span>Turn-Based</span><span>Strategy</span></div>
+        <div class="game-controls-hint">Set angle + power, click FIRE</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="gravitywars">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="gravitywars">JOIN</button>
+        </div>
+      </div>
+
+      <div class="games-category-label">🎪 PHYSICS / FUN</div>
+
+      <div class="game-card" data-game="knockout">
+        <div class="game-card-bg" style="--gc:#FF9500"></div>
+        <div class="game-emoji">🥊</div>
+        <div class="game-title">KNOCKOUT ARENA</div>
+        <div class="game-desc">Dash into rivals to knock them off the shrinking platform!</div>
+        <div class="game-tags"><span>2-6 players</span><span>Physics</span><span>2 min</span></div>
+        <div class="game-controls-hint">WASD to move | Space to DASH</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="knockout">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="knockout">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="ballblitz">
+        <div class="game-card-bg" style="--gc:#FF2D55"></div>
+        <div class="game-emoji">🎱</div>
+        <div class="game-title">BALL BLITZ</div>
+        <div class="game-desc">Dodge bouncing balls (3 lives) and kick them at rivals!</div>
+        <div class="game-tags"><span>2-6 players</span><span>Survival</span><span>2 min</span></div>
+        <div class="game-controls-hint">WASD to dodge | Click to kick</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="ballblitz">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="ballblitz">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="fallingtiles">
+        <div class="game-card-bg" style="--gc:#00F5FF"></div>
+        <div class="game-emoji">🟦</div>
+        <div class="game-title">FALLING TILES</div>
+        <div class="game-desc">Tiles crack underfoot then disappear! Survive as the floor vanishes.</div>
+        <div class="game-tags"><span>2-6 players</span><span>Platform</span><span>3 min</span></div>
+        <div class="game-controls-hint">WASD to move — stay on tiles!</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="fallingtiles">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="fallingtiles">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="chainreaction">
+        <div class="game-card-bg" style="--gc:#FF6EC7"></div>
+        <div class="game-emoji">💣</div>
+        <div class="game-title">CHAIN REACTION</div>
+        <div class="game-desc">Place orbs on a grid — overflow triggers chain explosions. Last orbs win!</div>
+        <div class="game-tags"><span>2-6 players</span><span>Turn-Based</span><span>Strategy</span></div>
+        <div class="game-controls-hint">Click a cell on your turn</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="chainreaction">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="chainreaction">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="neonsumo">
+        <div class="game-card-bg" style="--gc:#FFD700"></div>
+        <div class="game-emoji">🤼</div>
+        <div class="game-title">NEON SUMO</div>
+        <div class="game-desc">Hold Space to CHARGE then release for a massive push! Shove rivals out of the ring.</div>
+        <div class="game-tags"><span>2-6 players</span><span>Physics</span><span>3 min</span></div>
+        <div class="game-controls-hint">WASD to move | Hold Space to charge push</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="neonsumo">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="neonsumo">JOIN</button>
+        </div>
+      </div>
+
+      <div class="game-card" data-game="blitzcatcher">
+        <div class="game-card-bg" style="--gc:#39FF14"></div>
+        <div class="game-emoji">⭐</div>
+        <div class="game-title">BLITZ CATCHER</div>
+        <div class="game-desc">Catch falling stars! Bump rivals to steal their points. Golden stars = 5x!</div>
+        <div class="game-tags"><span>2-6 players</span><span>Arcade</span><span>45s</span></div>
+        <div class="game-controls-hint">A/D to move | Space: dash-steal</div>
+        <div class="game-card-actions">
+          <button class="btn btn-primary game-create" data-game="blitzcatcher">CREATE</button>
+          <button class="btn btn-secondary game-join" data-game="blitzcatcher">JOIN</button>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="btn btn-ghost" id="btn-hub-leaderboard">🏆 GLOBAL LEADERBOARD</button>
+  </div>
+</div>
+
+<!-- ═══ SCREEN: JOIN MODAL ═════════════════════════════════════════════ -->
+<div id="modal-join" class="modal hidden">
+  <div class="modal-box">
+    <h2 id="modal-join-title">JOIN ROOM</h2>
+    <input id="join-code-input" type="text" placeholder="ROOM CODE" maxlength="4" autocomplete="off">
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-primary" id="btn-modal-join">JOIN →</button>
+      <button class="btn btn-ghost" id="btn-modal-cancel">✕ CANCEL</button>
     </div>
   </div>
+</div>
 
-  <!-- ═══ SCREEN: LOBBY ══════════════════════════════════════════════ -->
-  <div id="screen-lobby" class="screen">
-    <div class="scanlines"></div>
-    <div class="lobby-content">
+<!-- ═══ SCREEN: LOBBY ══════════════════════════════════════════════════ -->
+<div id="screen-lobby" class="screen">
+  <div class="scanlines"></div>
+  <div class="lobby-content">
+    <div class="lobby-header">
+      <div id="lobby-game-badge" class="lobby-game-badge">BLOB ARENA</div>
       <h2 class="lobby-title">⚡ LOBBY</h2>
-      <div class="room-info">
-        <span>ROOM: </span><span id="room-code-display" class="room-code">----</span>
-        <button class="btn btn-tiny" id="btn-copy-code">📋 COPY</button>
-        <span id="map-name-display" class="map-badge">MAP</span>
-      </div>
-      <div class="player-grid" id="player-grid"></div>
-      <div id="lobby-msg" class="lobby-msg">Waiting for players... (min 2)</div>
-      <div class="lobby-actions">
-        <button class="btn btn-primary" id="btn-start" disabled>▶ START GAME</button>
-        <button class="btn btn-ghost" id="btn-leave">← LEAVE</button>
-      </div>
-      <!-- Lobby chat -->
-      <div class="lobby-chat">
-        <div id="lobby-chat-msgs" class="chat-msgs"></div>
-        <div class="chat-input-row">
-          <input id="lobby-chat-input" type="text" placeholder="Chat..." maxlength="80" autocomplete="off">
-          <button class="btn btn-tiny" id="btn-lobby-send">→</button>
-        </div>
+    </div>
+    <div class="room-info">
+      <span>ROOM: </span><span id="room-code-display" class="room-code">----</span>
+      <button class="btn btn-tiny" id="btn-copy-code">📋 COPY</button>
+    </div>
+    <div class="player-grid" id="player-grid"></div>
+    <div id="lobby-msg" class="lobby-msg">Waiting for players...</div>
+    <div class="lobby-actions">
+      <button class="btn btn-primary" id="btn-start" disabled>▶ START GAME</button>
+      <button class="btn btn-ghost" id="btn-leave">← LEAVE</button>
+    </div>
+    <div class="lobby-chat">
+      <div id="lobby-chat-msgs" class="chat-msgs"></div>
+      <div class="chat-input-row">
+        <input id="lobby-chat-input" type="text" placeholder="Chat..." maxlength="80" autocomplete="off">
+        <button class="btn btn-tiny" id="btn-lobby-send">→</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ═══ SCREEN: COUNTDOWN ══════════════════════════════════════════ -->
-  <div id="screen-countdown" class="screen">
-    <div class="countdown-number" id="countdown-number">3</div>
-    <div class="countdown-label">GET READY!</div>
-  </div>
+<!-- ═══ SCREEN: COUNTDOWN ══════════════════════════════════════════════ -->
+<div id="screen-countdown" class="screen">
+  <div class="countdown-number" id="countdown-number">3</div>
+  <div class="countdown-label" id="countdown-game-name">GET READY!</div>
+</div>
 
-  <!-- ═══ SCREEN: GAME ═══════════════════════════════════════════════ -->
-  <div id="screen-game" class="screen">
-    <!-- HUD -->
-    <div class="hud">
-      <div class="hud-left">
-        <div id="hud-health-bar">
-          <div class="hud-label">HP</div>
-          <div class="health-track"><div id="health-fill" class="health-fill"></div></div>
-          <span id="health-val">100</span>
-        </div>
-        <div id="hud-powerups"></div>
-      </div>
-      <div class="hud-center">
-        <div id="hud-timer" class="hud-timer">1:30</div>
-        <div id="hud-alive" class="hud-alive">👥 8</div>
-      </div>
-      <div class="hud-right">
-        <div id="hud-score">SCORE: 0</div>
-        <div id="hud-kills">KILLS: 0</div>
-      </div>
-    </div>
-
-    <!-- Game Canvas -->
-    <div class="canvas-wrapper">
-      <canvas id="game-canvas" width="800" height="600"></canvas>
-      <!-- Kill feed -->
-      <div id="kill-feed" class="kill-feed"></div>
-      <!-- Power-up announce -->
-      <div id="pu-announce" class="pu-announce hidden"></div>
-    </div>
-
-    <!-- Scoreboard overlay (Tab) -->
+<!-- ═══ SCREEN: GAME ═══════════════════════════════════════════════════ -->
+<div id="screen-game" class="screen">
+  <div class="hud" id="game-hud"></div>
+  <div class="canvas-wrapper">
+    <canvas id="game-canvas" width="800" height="600"></canvas>
+    <div id="kill-feed" class="kill-feed"></div>
+    <div id="pu-announce" class="pu-announce hidden"></div>
     <div id="scoreboard" class="scoreboard hidden">
       <h3>📊 SCOREBOARD</h3>
       <div id="scoreboard-list"></div>
     </div>
-
-    <!-- In-game chat -->
-    <div class="ingame-chat">
-      <div id="game-chat-msgs" class="chat-msgs"></div>
-      <div class="chat-input-row hidden" id="chat-input-row">
-        <input id="game-chat-input" type="text" placeholder="Chat... (Enter to send)" maxlength="80" autocomplete="off">
-      </div>
-    </div>
-
-    <div class="controls-hint">TAB: Scoreboard &nbsp;|&nbsp; T: Chat &nbsp;|&nbsp; WASD: Move &nbsp;|&nbsp; MOUSE: Aim &amp; Shoot</div>
   </div>
-
-  <!-- ═══ SCREEN: GAME OVER ══════════════════════════════════════════ -->
-  <div id="screen-gameover" class="screen">
-    <div class="scanlines"></div>
-    <div class="gameover-content">
-      <div id="winner-banner" class="winner-banner"></div>
-      <div class="results-table-wrap">
-        <table class="results-table" id="results-table">
-          <thead><tr><th>#</th><th>PLAYER</th><th>SCORE</th><th>KILLS</th><th>DEATHS</th></tr></thead>
-          <tbody id="results-body"></tbody>
-        </table>
-      </div>
-      <div class="go-leaderboard">
-        <h3>🏆 SESSION LEADERBOARD</h3>
-        <div id="go-leaderboard-list"></div>
-      </div>
-      <div class="go-actions">
-        <button class="btn btn-primary" id="btn-play-again">🔄 PLAY AGAIN</button>
-        <button class="btn btn-ghost" id="btn-main-menu">🏠 MAIN MENU</button>
-      </div>
+  <div class="ingame-chat">
+    <div id="game-chat-msgs" class="chat-msgs"></div>
+    <div class="chat-input-row hidden" id="chat-input-row">
+      <input id="game-chat-input" type="text" placeholder="Chat... (Enter to send)" maxlength="80" autocomplete="off">
     </div>
   </div>
+  <div class="controls-hint" id="game-controls-hint"></div>
+</div>
 
-  <!-- ═══ MODAL: LEADERBOARD ════════════════════════════════════════ -->
-  <div id="modal-leaderboard" class="modal hidden">
-    <div class="modal-box">
-      <h2>🏆 SESSION LEADERBOARD</h2>
-      <div id="modal-lb-list"></div>
-      <button class="btn btn-ghost" id="btn-lb-close">✕ CLOSE</button>
+<!-- ═══ SCREEN: GAME OVER ══════════════════════════════════════════════ -->
+<div id="screen-gameover" class="screen">
+  <div class="scanlines"></div>
+  <div class="gameover-content">
+    <div id="winner-banner" class="winner-banner"></div>
+    <div class="results-table-wrap">
+      <table class="results-table">
+        <thead><tr id="results-thead"></tr></thead>
+        <tbody id="results-body"></tbody>
+      </table>
+    </div>
+    <div class="go-actions">
+      <button class="btn btn-primary" id="btn-play-again">🔄 PLAY AGAIN</button>
+      <button class="btn btn-accent" id="btn-hub-return">🕹️ ARCADE HUB</button>
     </div>
   </div>
+</div>
 
-  <!-- ═══ ERROR TOAST ════════════════════════════════════════════════ -->
-  <div id="toast" class="toast hidden"></div>
+<!-- ═══ MODAL: LEADERBOARD ════════════════════════════════════════════ -->
+<div id="modal-leaderboard" class="modal hidden">
+  <div class="modal-box">
+    <h2>🏆 GLOBAL LEADERBOARD</h2>
+    <div id="modal-lb-list"></div>
+    <button class="btn btn-ghost" id="btn-lb-close">✕ CLOSE</button>
+  </div>
+</div>
 
-  <!-- Socket.io CDN -->
-  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
-  <script src="js/sounds.js"></script>
-  <script src="js/renderer.js"></script>
-  <script src="js/game.js"></script>
+<!-- ═══ TOAST ══════════════════════════════════════════════════════════ -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script src="js/sounds.js"></script>
+<script src="js/games/blobRenderer.js"></script>
+<script src="js/games/snakeRenderer.js"></script>
+<script src="js/games/asteroidRenderer.js"></script>
+<script src="js/games/pongRenderer.js"></script>
+<script src="js/games/newGamesRenderer.js"></script>
+<script src="js/newGamesClient.js"></script>
+<script src="js/arcade.js"></script>
 </body>
 </html>

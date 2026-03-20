@@ -1,7 +1,7 @@
 {
-  "name": "blob-arena",
-  "version": "1.0.0",
-  "description": "Blob Arena - Multiplayer Flash-style browser game",
+  "name": "neon-arcade",
+  "version": "2.0.0",
+  "description": "Neon Arcade - 4 multiplayer Flash-style games",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",

@@ -1,136 +1,77 @@
-# 🟢 BLOB ARENA — Multiplayer Flash-Style Browser Game
+# 🕹️ NEON ARCADE — 4 Multiplayer Games
 
-A real-time multiplayer survival arena game built with Node.js, Socket.io, and HTML5 Canvas.
+A browser-based multiplayer arcade with 4 real-time games built with Node.js, Socket.io, and HTML5 Canvas.
 
-**Last Blob Standing Wins!** Shoot other blobs, collect power-ups, survive the timer.
+## 🎮 Games
+
+| Game | Type | Players | Description |
+|---|---|---|---|
+| 🟢 **Blob Arena** | PvP | 2–8 | Shoot other blobs. Last one alive wins. |
+| 🐍 **Snake Royale** | PvP | 2–6 | Grow longest, eat rivals, survive. |
+| 🚀 **Asteroid Dash** | Co-op | 1–6 | Survive waves of asteroids together. |
+| 🏓 **Pong Wars** | Teams | 2–4 | Multi-ball team pong chaos. First to 7 wins. |
 
 ---
 
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 16+ installed
-
-### Setup & Run
+## 🚀 Setup
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Start the server
 npm start
-
-# 3. Open in browser
 # → http://localhost:3000
 ```
 
-For development with auto-reload:
-```bash
-npm run dev
-```
-
 ---
 
-## 🎮 How to Play
+## 🎮 Controls
 
-| Action | Control |
-|---|---|
-| Move | WASD or Arrow Keys |
-| Aim | Mouse |
-| Shoot | Left Click or Space |
-| Scoreboard | Hold Tab |
-| Chat | T (then Enter to send) |
-
-### Flow
-1. Enter your name on the start screen
-2. Create a room or join with a 4-letter code
-3. Share the room code with friends (min 2 players)
-4. Host clicks **START GAME**
-5. Countdown → Arena battle begins!
-6. Eliminate other blobs or survive the 90-second timer
-7. Last blob alive wins! (or highest score when time runs out)
-
----
-
-## ⚡ Power-Ups
-
-| Icon | Name | Effect |
+| Game | Move | Shoot/Action |
 |---|---|---|
-| ⚡ | Speed Boost | Move 70% faster for 5 seconds |
-| 🛡️ | Shield | Block all damage for 4 seconds |
-| 🔥 | Rapid Fire | Shoot 2.5x faster for 5 seconds |
-| 💪 | Giant Mode | Grow 60% larger for 4 seconds |
+| Blob Arena | WASD | Mouse aim + Click/Space |
+| Snake Royale | WASD or Arrow Keys | (none) |
+| Asteroid Dash | W (thrust) | Mouse aim + Click/Space |
+| Pong Wars | W/S or Up/Down | (automatic) |
+
+**All games:** TAB = Scoreboard | T = Chat
 
 ---
 
-## 🗺️ Maps
-
-- **Neon Colosseum** — Symmetric walls, perfect for fair fights
-- **Cyber Maze** — Winding corridors and ambush points  
-- **Acid Pit** — Central obstacle forces edge play
-
-Maps are randomly selected each game.
-
----
-
-## 📁 Project Structure
+## 📁 Structure
 
 ```
-blob-arena/
+neon-arcade/
 ├── server/
-│   └── index.js          # Game server (Express + Socket.io + game logic)
+│   ├── index.js              ← Main server
+│   └── games/
+│       ├── blobArena.js      ← Blob Arena server logic
+│       ├── snakeRoyale.js    ← Snake Royale server logic
+│       ├── asteroidDash.js   ← Asteroid Dash server logic
+│       └── pongWars.js       ← Pong Wars server logic
 ├── public/
-│   ├── index.html         # Main HTML
-│   ├── css/
-│   │   └── style.css      # Flash-style neon CSS
+│   ├── index.html            ← Arcade hub
+│   ├── css/style.css         ← Neon retro styles
 │   └── js/
-│       ├── sounds.js      # Web Audio API sound effects
-│       ├── renderer.js    # Canvas rendering engine
-│       └── game.js        # Client-side game logic & socket events
-├── package.json
-└── README.md
+│       ├── arcade.js         ← Main client + UI
+│       ├── sounds.js         ← Web Audio sound effects
+│       └── games/
+│           ├── blobRenderer.js
+│           ├── snakeRenderer.js
+│           ├── asteroidRenderer.js
+│           └── pongRenderer.js
+└── package.json
 ```
 
----
-
-## 🛡️ Anti-Cheat
-
-- All movement and shooting is validated server-side
-- Player positions are calculated on the server (authoritative)
-- Input values are type-checked and clamped
-- Shoot cooldowns enforced server-side
-
----
-
-## 🔧 Configuration (server/index.js)
-
-```js
-const GAME_DURATION = 90;     // seconds per round
-const MAX_PLAYERS = 8;         // players per room
-const PLAYER_SPEED = 4;        // movement speed
-const BULLET_SPEED = 7;        // projectile speed
-const BULLET_DAMAGE = 20;      // damage per hit
-const POWER_UP_INTERVAL = 8000; // ms between power-up spawns
-```
-
----
-
-## 🌐 Deploying
-
-Works on any Node.js host (Railway, Render, Heroku, etc.):
+## 🌐 Deploy on Railway
 
 ```bash
-# Set PORT environment variable (default: 3000)
-PORT=8080 npm start
+npm i -g @railway/cli
+railway login
+railway init
+railway up
 ```
 
-For Socket.io in production, make sure your proxy supports WebSocket upgrades.
+## 🔧 Deploy on Render
 
----
-
-## 🎨 Tech Stack
-
-- **Backend**: Node.js + Express + Socket.io
-- **Frontend**: Vanilla JS + HTML5 Canvas
-- **Audio**: Web Audio API (no external files needed)
-- **Fonts**: Google Fonts (Orbitron + Share Tech Mono)
+- Build: `npm install`
+- Start: `node server/index.js`
+- Publish directory: *(leave blank)*
